@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Let's study javascript</title>
+    <style>
+        .caution {
+            color: red;
+        }
+        .codeArea {
+            background-color: #333;
+            color: #ddd;
+        }
+        code {
+            font-family: 'Osaka－等幅', 'Osaka-Mono';
+        }
+    </style>
+</head>
+<body>
+    <div class="pageWrap">
+        <h1>DOM 情報の取得と変更スピードを比較</h1>
+        <p class="caution">結果は console でご確認ください</p>
+        <section>
+            <h1>特定の DOM 情報を取得及び変更する</h1>
+            <p>下記コードをそれぞれ for 文で 50000 回実行して計測</p>
+            <div class="codeArea">
+                <pre>
+                    <code>
+    // ClassName で取得して text を変更
+    document.getElementsByClassName('js-item')[0].textContent = i;
+
+    // セレクターで取得して text を変更
+    document.querySelector('.js-item').textContent = i;
+
+    // 取得したい DOM の親（変数保持）から セレクターで取得して text を変更
+    parent.querySelector('.js-item').textContent = i;
+
+    // id で取得して text を変更
+    document.getElementById('js-item').textContent = i;
+
+    // 変数保持 で text を変更
+    item.textContent = i;
+                    </code>
+                </pre>
+            </div>
+        </section>
+        <section>
+            <h1>同じ class 名を持つ全ての DOM 情報を取得する</h1>
+            <p>下記コードをそれぞれ for 文で 50000 回実行して計測</p>
+            <div class="codeArea">
+                    <pre>
+                        <code>
+    // ClassName で取得
+    document.getElementsByClassName('js-item');
+
+    // 取得したい複数の DOM の親（変数保持）から ClassName で取得
+    parent.getElementsByClassName('js-item');
+
+    // セレクターで取得
+    document.querySelectorAll('.js-item');
+
+    // 取得したい複数の DOM の親（変数保持）からセレクターで取得
+    parent.querySelectorAll('.js-item');
+                    </code>
+                </pre>
+            </div>
+        </section>
+        <section>
+            <h1>計測対象の DOM</h1>
+            <div class="test">
+                <div class="test__box">
+                    <ul class="test__list js-list">
+                        <li id ="js-item" class="test__item js-item">Hello World 1</li>
+                        <li class="test__item js-item">Hello World 2</li>
+                        <li class="test__item js-item">Hello World 3</li>
+                        <li class="test__item js-item">Hello World 4</li>
+                        <li class="test__item js-item">Hello World 5</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
